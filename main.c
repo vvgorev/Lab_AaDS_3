@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <windows.h>
 
 typedef enum { NUMBER, VARIABLE, OPERATOR } NodeType;
 
@@ -144,23 +143,22 @@ Node* parse_simple_expr(const char* expr) {
 }
 
 int main() {
-    SetConsoleOutputCP(1251);
     const char* input = "4 * a / 2";
-    printf("Исходное выражение: %s\n", input);
+    printf("Input expression: %s\n", input);
 
     Node* tree = parse_simple_expr(input);
     if (!tree) {
-        printf("Ошибка парсинга!\n");
+        printf("Parse error!\n");
         return 1;
     }
 
-    printf("Дерево до упрощения: ");
+    printf("Tree before simplification: ");
     print_tree(tree);
     printf("\n");
 
     tree = simplify_division(tree);
 
-    printf("Дерево после упрощения: ");
+    printf("Tree after simplification: ");
     print_tree(tree);
     printf("\n");
 
